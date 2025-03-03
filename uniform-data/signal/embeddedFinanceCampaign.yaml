@@ -1,0 +1,16 @@
+id: embeddedFinanceCampaign
+name: Embedded Finance Campaign
+cap: 100
+crit:
+  op: '&'
+  type: G
+  clauses:
+    - type: QS
+      match:
+        cs: false
+        op: '='
+        rhs: EmbeddedFinance
+      queryName: utm_campaign
+dur: p
+description: ''
+str: 100

@@ -1,0 +1,9 @@
+id: 159c9ed8-cee5-4ff3-a1b2-b42a4268935e
+name: First Campaign Page
+order: 500
+path: /cmp/first
+type: composition
+pathSegment: first
+data: {}
+compositionId: 0422433a-f5b5-4dad-8a13-386e567870c8
+projectMapId: 8a35c419-5150-4f76-aa21-7e4976c9dfcb

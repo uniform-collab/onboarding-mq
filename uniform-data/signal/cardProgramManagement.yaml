@@ -1,0 +1,16 @@
+id: cardProgramManagement
+name: Card Program Management
+cap: 100
+crit:
+  op: '&'
+  type: G
+  clauses:
+    - type: QS
+      match:
+        cs: false
+        op: '~'
+        rhs: CardProgMgmt
+      queryName: utm_campaign
+dur: t
+description: ''
+str: 100
