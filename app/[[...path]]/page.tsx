@@ -20,3 +20,5 @@ export default async function HomePage(props: PageParameters) {
     </>
   );
 }
+
+export const runtime = "edge";
