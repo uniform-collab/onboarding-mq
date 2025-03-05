@@ -24,8 +24,8 @@ export default async function HomePage(props: PageParameters) {
   let quirks = {};
   if (companyData.ok) {
     const { geoIP, role, seniority, company } = await companyData.json();
-    const { logo, name } = company || {};
-    const { employees } = company.metrics || 0;
+    const { logo, name, metrics } = company || {};
+    const { employees } = metrics || 0;
     console.log({ geoIP, role, seniority, employees, logo, name });
     quirks = {
       employees,
