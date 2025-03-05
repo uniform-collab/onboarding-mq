@@ -12,7 +12,6 @@ export default async function HomePage(props: PageParameters) {
   const route = await retrieveRoute(props);
   const headersList = headers();
   const ip = headersList.get("x-nf-client-connection-ip");
-  console.log({ ip });
   const companyData = await fetch(
     `https://reveal.clearbit.com/v1/companies/find?ip=${ip}`,
     {
@@ -23,10 +22,9 @@ export default async function HomePage(props: PageParameters) {
   );
   let quirks = {};
   if (companyData.ok) {
-    const { geoIP, role, seniority, company } = await companyData.json();
+    const { role, seniority, company } = await companyData.json();
     const { logo, name, metrics } = company || {};
     const { employees } = metrics || 0;
-    console.log({ geoIP, role, seniority, employees, logo, name });
     quirks = {
       employees,
       companyName: name,
@@ -39,6 +37,7 @@ export default async function HomePage(props: PageParameters) {
   const serverContext = await createServerUniformContext({
     searchParams: await props.searchParams,
   });
+
   return (
     <>
       <ContextUpdateTransfer
