@@ -50,6 +50,7 @@ export default async function HomePage(props: PageParameters) {
       <UniformComposition
         {...props}
         route={route}
+        serverContext={serverContext}
         resolveComponent={resolveComponent}
         mode="server"
       />
