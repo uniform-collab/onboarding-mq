@@ -11,8 +11,8 @@ import { headers } from "next/headers";
 export default async function HomePage(props: PageParameters) {
   const route = await retrieveRoute(props);
   const headersList = headers();
-  const ip = headersList.get("x-forwarded-for");
-  console.log({ ip, headersList });
+  const ip = headersList.get("x-nf-client-connection-ip");
+  console.log({ ip });
   const companyData = await fetch(
     `https://reveal.clearbit.com/v1/companies/find?ip=${ip}`,
     {
