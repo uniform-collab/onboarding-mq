@@ -1,14 +1,15 @@
 import {
+  ComponentProps,
   DefaultNotImplementedComponent,
   ResolveComponentFunction,
-  ResolveComponentResult,
-} from '@uniformdev/canvas-next-rsc/component';
-import * as mappings from './mappings';
-import { ResolveComponentResultWithType } from './models';
+} from "@uniformdev/canvas-next-rsc/component";
+import * as mappings from "./mappings";
+import { ResolveComponentResultWithType } from "./models";
+import { WrappingComponent } from "./wrappingComponent";
 
 export const resolveComponent: ResolveComponentFunction = ({ component }) => {
-  let result: ResolveComponentResult = {
-    component: DefaultNotImplementedComponent
+  let result: Omit<ResolveComponentResultWithType, "type"> = {
+    component: DefaultNotImplementedComponent,
   };
 
   const keys = Object.keys(mappings);
@@ -16,7 +17,9 @@ export const resolveComponent: ResolveComponentFunction = ({ component }) => {
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i]!;
 
-    const mapping = (mappings as any)[key] as ResolveComponentResultWithType | undefined;
+    const mapping = mappings[key as keyof typeof mappings] as
+      | ResolveComponentResultWithType
+      | undefined;
 
     if (mapping?.type === component.type) {
       result = mapping;
@@ -24,5 +27,15 @@ export const resolveComponent: ResolveComponentFunction = ({ component }) => {
     }
   }
 
-  return result;
+  return {
+    component: (props: ComponentProps) => {
+      return (
+        <WrappingComponent
+          {...props}
+          resolvedComponent={result.component}
+          parameterMappings={result.parameters}
+        />
+      );
+    },
+  };
 };

@@ -1,46 +1,14 @@
-import {
-  ComponentProps,
-  UniformRichText,
-  UniformText,
-} from "@uniformdev/canvas-next-rsc/component";
-import { ParameterRichTextValue } from "@uniformdev/richtext";
+import { HeroProps } from "@/uniform/mappings";
 
-export const Hero = ({
-  title,
-  description,
-  component,
-  context,
-}: ComponentProps<HeroProps>) => {
-  return (
-    <>
-      <UniformText
-        as={"h1"}
-        parameterId="title"
-        className="title"
-        context={context}
-        component={component}
-      />
-      <UniformRichText
-        parameterId="description"
-        className="description"
-        placeholder={"enter rich text here"}
-        component={component}
-        context={context}
-      />
-
-      {/* SDK-less example */}
-      {/* <h1 className="title">{title}</h1> */}
-      {/* <div
-        className="description"
-        dangerouslySetInnerHTML={{
-          __html: renderToHtml(description?.root),
-        }}
-      /> */}
-    </>
-  );
-};
-
-export type HeroProps = {
-  title: string;
-  description: ParameterRichTextValue;
-};
+export const Hero = ({ title, description }: HeroProps) => (
+  <>
+    {/* conditionally render title if it's a React component (when using UniformText ) or a string */}
+    {typeof title === "string" ? <h1 className="title">{title}</h1> : title}
+    {/* conditionally render description if it's a React component (when using UniformRichText ) or a string */}
+    {typeof description === "string" ? (
+      <p className="description">{description}</p>
+    ) : (
+      description
+    )}
+  </>
+);

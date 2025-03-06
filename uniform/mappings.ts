@@ -2,11 +2,24 @@ import { ResolveComponentResultWithType } from "./models";
 
 import { PageComposition } from "../components/pageComposition";
 import { Hero } from "../components/hero";
-// components will be registered here
+import { ReactNode } from "react";
 
-export const heroMapping: ResolveComponentResultWithType = {
+// existing props
+export type HeroProps = {
+    title: string | ReactNode;
+    description: string | ReactNode;
+};
+
+export const heroMapping: ResolveComponentResultWithType<HeroProps> = {
     type: "hero",
     component: Hero,
+    parameters: {
+        title: {
+            className: "title",
+            as: "h1",
+        },
+        description: {},
+    },
 };
 
 export const compositionMapping: ResolveComponentResultWithType = {
